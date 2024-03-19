@@ -42,13 +42,13 @@ public class NoOperationFormAuthenticator implements Authenticator {
 
     @Override
     public boolean requiresUser() {
-        LOG.debugf("requiresUser");
+        LOG.warnf("requiresUser");
         return false;
     }
 
     @Override
     public boolean configuredFor(KeycloakSession keycloakSession, RealmModel realmModel, UserModel userModel) {
-        LOG.debugf("configuredFor");
+        LOG.warnf("configuredFor");
         return false;
     }
 

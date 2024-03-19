@@ -14,19 +14,19 @@ public class NoOperationAuthenticator implements Authenticator {
 
     @Override
     public void authenticate(AuthenticationFlowContext authenticationFlowContext) {
-        LOG.debugf("authenticate");
+        LOG.warnf("authenticate");
         authenticationFlowContext.success();
     }
 
     @Override
     public void action(AuthenticationFlowContext authenticationFlowContext) {
-        LOG.debugf("action");
+        LOG.warnf("action");
         authenticationFlowContext.success();
     }
 
     @Override
     public boolean requiresUser() {
-        LOG.debugf("requiresUser");
+        LOG.warnf("requiresUser");
         return false;
     }
 
