@@ -10,6 +10,7 @@ This project is based on the [custom Keycloak template](https://github.com/inven
 - `container`: creates the custom docker image
 - `docker-compose`: provides a sample for launching the custom docker image
 - `extensions`: provides samples for Keycloak SPI implementations'
+  
   !CHANGES:: added disclosure authenticator
 - `server`: provides a Keycloak installation for local development & testing
 - `themes`: provides samples for custom themes
