@@ -1,74 +1,47 @@
 package com.inventage.keycloak.disclosureauthenticator.infrastructure.authenticator;
 
 import org.keycloak.Config;
+import org.keycloak.authentication.AuthenticationFlowContext;
 import org.keycloak.authentication.Authenticator;
-import org.keycloak.authentication.AuthenticatorFactory;
-import org.keycloak.models.AuthenticationExecutionModel;
-import org.keycloak.models.KeycloakSession;
-import org.keycloak.models.KeycloakSessionFactory;
+import org.keycloak.models.*;
 import org.keycloak.provider.ProviderConfigProperty;
+import org.jboss.logging.Logger;
 
 import java.util.List;
 
-public class DisclosureAuthenticator implements AuthenticatorFactory  {
+
+public class DisclosureAuthenticator implements Authenticator  {
+    private static final Logger LOG = Logger.getLogger(DisclosureAuthenticator.class);
 
     @Override
-    public String getDisplayType() {
-        return null;
+    public void authenticate(AuthenticationFlowContext authenticationFlowContext) {
+        LOG.warnf("authenticate");
+        authenticationFlowContext.success();
     }
 
     @Override
-    public String getReferenceCategory() {
-        return null;
+    public void action(AuthenticationFlowContext authenticationFlowContext) {
+        LOG.warnf("action");
+        authenticationFlowContext.success();
     }
 
     @Override
-    public boolean isConfigurable() {
+    public boolean requiresUser() {
         return false;
     }
 
     @Override
-    public AuthenticationExecutionModel.Requirement[] getRequirementChoices() {
-        return new AuthenticationExecutionModel.Requirement[0];
-    }
-
-    @Override
-    public boolean isUserSetupAllowed() {
+    public boolean configuredFor(KeycloakSession keycloakSession, RealmModel realmModel, UserModel userModel) {
         return false;
     }
 
     @Override
-    public String getHelpText() {
-        return null;
-    }
-
-    @Override
-    public List<ProviderConfigProperty> getConfigProperties() {
-        return null;
-    }
-
-    @Override
-    public Authenticator create(KeycloakSession keycloakSession) {
-        return null;
-    }
-
-    @Override
-    public void init(Config.Scope scope) {
-
-    }
-
-    @Override
-    public void postInit(KeycloakSessionFactory keycloakSessionFactory) {
+    public void setRequiredActions(KeycloakSession keycloakSession, RealmModel realmModel, UserModel userModel) {
 
     }
 
     @Override
     public void close() {
 
-    }
-
-    @Override
-    public String getId() {
-        return null;
     }
 }

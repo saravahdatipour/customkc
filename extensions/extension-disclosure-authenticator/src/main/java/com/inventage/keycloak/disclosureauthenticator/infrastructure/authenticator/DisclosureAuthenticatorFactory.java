@@ -8,13 +8,21 @@ import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.KeycloakSessionFactory;
 import org.keycloak.provider.ProviderConfigProperty;
 
+import java.util.Collections;
 import java.util.List;
 
 public class DisclosureAuthenticatorFactory implements AuthenticatorFactory {
+    private static final String PROVIDER_ID = "disclosure-authenticator";
 
+    private static final AuthenticationExecutionModel.Requirement[] REQUIREMENT_CHOICES = {
+            AuthenticationExecutionModel.Requirement.REQUIRED,
+            AuthenticationExecutionModel.Requirement.ALTERNATIVE,
+            AuthenticationExecutionModel.Requirement.CONDITIONAL,
+            AuthenticationExecutionModel.Requirement.DISABLED
+    };
     @Override
     public String getDisplayType() {
-        return null;
+        return "Disclosure  Authenticator";
     }
 
     @Override
@@ -29,8 +37,10 @@ public class DisclosureAuthenticatorFactory implements AuthenticatorFactory {
 
     @Override
     public AuthenticationExecutionModel.Requirement[] getRequirementChoices() {
-        return new AuthenticationExecutionModel.Requirement[0];
+        return REQUIREMENT_CHOICES;
     }
+
+
 
     @Override
     public boolean isUserSetupAllowed() {
@@ -39,17 +49,17 @@ public class DisclosureAuthenticatorFactory implements AuthenticatorFactory {
 
     @Override
     public String getHelpText() {
-        return null;
+        return "This Authenticator does nothing for now. but Disclosure will be implemented soon";
     }
 
     @Override
     public List<ProviderConfigProperty> getConfigProperties() {
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
     public Authenticator create(KeycloakSession keycloakSession) {
-        return null;
+        return new DisclosureAuthenticator();
     }
 
     @Override
@@ -69,6 +79,6 @@ public class DisclosureAuthenticatorFactory implements AuthenticatorFactory {
 
     @Override
     public String getId() {
-        return null;
+        return PROVIDER_ID;
     }
 }
