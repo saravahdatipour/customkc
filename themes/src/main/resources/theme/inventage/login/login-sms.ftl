@@ -1,7 +1,7 @@
 <#import "template.ftl" as layout>
-<@layout.registrationLayout displayInfo=true; section>
-    <#if section = "header">
-        ${msg("smsAuthTitle",realm.displayName)}
+<@layout.registrationLayout displayInfo=false displayMessage=false; section>
+    <#if section = "title">
+        ${msg("loginTitle",(realm.displayName!''))}
     <#elseif section = "form">
         <form id="kc-sms-code-login-form" class="${properties.kcFormClass!}" action="${url.loginAction}" method="post">
             <div class="${properties.kcFormGroupClass!}">
@@ -19,12 +19,34 @@
                     </div>
                 </div>
 
-                <div id="kc-form-buttons" class="${properties.kcFormButtonsClass!}">
-                    <input class="${properties.kcButtonClass!} ${properties.kcButtonPrimaryClass!} ${properties.kcButtonBlockClass!} ${properties.kcButtonLargeClass!}" type="submit" value="${msg("doSubmit")}"/>
+                                <div id="kc-form-buttons" style="margin-top:10px" class="${properties.kcFormButtonsClass!}">
+                                    <div class="${properties.kcFormButtonsWrapperClass!}">
+                                        <input tabindex="4" class="${properties.kcButtonClass!}" name="login" id="kc-login" type="submit" value="${msg("doLogIn")}"/>
+                                        <#if realm.password && social.providers??>
+                                            <#list social.providers as p>
+                                                <a href="${p.loginUrl}" id="zocial-${p.alias}" class="btn btn-primary">${msg("doLogIn")} With ${p.displayName}</a>
+                                            </#list>
+                                        </#if>
+                                    </div>
+                                </div>
+
+                                <#if realm.password && realm.registrationAllowed && !usernameEditDisabled??>
+                                    <div class="form-group">
+                                        <div class="col-md-12 control">
+                                            <div style="border-top: 1px solid#888; padding-top:15px;" >
+                                                ${msg("noAccount")}
+                                                <a tabindex="6" href="${url.registrationUrl}" style="font-weight: bold;">
+                                                    ${msg("doRegister")}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </#if>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </form>
-    <#elseif section = "info" >
-        ${msg("smsAuthInstruction")}
+        </#if>
     </#if>
 </@layout.registrationLayout>
