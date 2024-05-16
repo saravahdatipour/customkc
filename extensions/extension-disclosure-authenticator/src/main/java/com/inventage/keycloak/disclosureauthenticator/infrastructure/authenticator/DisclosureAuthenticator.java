@@ -35,7 +35,6 @@ import java.util.Map;
 public class DisclosureAuthenticator implements Authenticator  {
     private static final Logger LOG = Logger.getLogger(DisclosureAuthenticator.class);
     public static final String USERNAME_PASSWORD_LOGIN_FORM = "username-password-login.ftl";
-    public static final String YIVI_FORM = "backup.ftl";
     public static boolean YIVI_TOGGLE = true;
 
 
@@ -65,9 +64,11 @@ public class DisclosureAuthenticator implements Authenticator  {
         final LoginFormsProvider formsProvider = context.form();
         formsProvider.setAttribute("formModel", new DisclosureFormModel());
         // Example boolean variable
+        boolean enableSecondOption = Boolean.parseBoolean(context.getAuthenticatorConfig().getConfig().get("enableSecondOption"));
+
         boolean isUserVerified = true;
-        formsProvider.setAttribute("isUserVerified", isUserVerified);
-        context.challenge(formsProvider.createForm("disclosure.ftl"));
+        formsProvider.setAttribute("enableSecondOption", enableSecondOption);
+        context.challenge(formsProvider.createForm("backup.ftl"));
     }
 
 
